@@ -114,7 +114,8 @@ class Backorder extends Mage_Shell_Abstract
 
     private function moveFile($csvFile)
     {
-        rename("../../var/backorder/" . $csvFile, "../var/backorder/archive" . $csvFile);
+        $fileName = str_replace("var/backorder", "", $csvFile);
+        rename("var/backorder/" . $fileName, "var/backorder/archive" . $fileName);
     }
 
     private function sendEmail($templateId, $recipientEmail, $recipientName, $vars)
