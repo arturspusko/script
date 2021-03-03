@@ -173,25 +173,25 @@ class Backorder extends Mage_Shell_Abstract
 
         // Functionality to check if product has associated product (we need to check if it
         // is a part of a grouped product. If it fails, then default value is returned
-//        if ($_product->getTypeId() != 'grouped') // check if the product is grouped product
-//        {
-//            $allGroupedProducts = Mage::getModel('catalog/product')
-//                ->getCollection()
-//                ->addAttributeToFilter('type_id', array('eq' => 'grouped'));
-//
-//            foreach ($allGroupedProducts as $singleGroupedProduct) {
-//                $associatedProducts[] = $singleGroupedProduct->getTypeInstance(true)->getAssociatedProducts($singleGroupedProduct);
-//
-//                foreach ($associatedProducts as $singleProduct) {
-//                    foreach ($singleProduct as $product) {
-//                        if($product->getSku() == $sku) {
-//                            $_product = $product;
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        if ($_product->getTypeId() != 'grouped') // check if the product is grouped product
+        {
+            $allGroupedProducts = Mage::getModel('catalog/product')
+                ->getCollection()
+                ->addAttributeToFilter('type_id', array('eq' => 'grouped'));
+
+            foreach ($allGroupedProducts as $singleGroupedProduct) {
+                $associatedProducts[] = $singleGroupedProduct->getTypeInstance(true)->getAssociatedProducts($singleGroupedProduct);
+
+                foreach ($associatedProducts as $singleProduct) {
+                    foreach ($singleProduct as $product) {
+                        if($product->getSku() == $sku) {
+                            $_product = $product;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         if ($this->getCustomerGroupId($customerId) == 2) {
             $domain = "https://wholesale.starwest-botanicals.com/";
