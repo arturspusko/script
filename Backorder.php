@@ -1,18 +1,4 @@
 <?php
-//require_once '../lib/Zend/Exception.php';
-//require_once '../lib/Zend/Config.php';
-//require_once '../lib/Zend/Config/Xml.php';
-//require_once '../lib/Zend/Db.php';
-//require_once '../lib/Zend/Db/Exception.php';
-//require_once '../lib/Zend/Db/Statement/Interface.php';
-//require_once '../lib/Zend/Db/Statement/Exception.php';
-//require_once '../lib/Zend/Db/Statement.php';
-//require_once '../lib/Zend/Db/Statement/Pdo.php';
-//require_once '../lib/Zend/Db/Profiler.php';
-//require_once '../lib/Zend/Db/Adapter/Abstract.php';
-//require_once '../lib/Zend/Db/Adapter/Pdo/Abstract.php';
-//require_once '../lib/Zend/Db/Adapter/Pdo/Mysql.php';
-//require_once '../lib/Zend/Loader.php';
 require_once 'abstract.php';
 
 
