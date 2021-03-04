@@ -16,6 +16,7 @@ class Backorder extends Mage_Shell_Abstract
         $csvFiles = $this->getFileNames();
         foreach ($csvFiles as $csvFile) {
 
+            echo "\n opening " . $csvFile;
             $this->fileData = $this->getFileData($csvFile);
             foreach ($this->fileData as $oneRow) {
                 $this->data = array_merge($this->data, $oneRow);
@@ -32,9 +33,11 @@ class Backorder extends Mage_Shell_Abstract
                 var_dump($this->data);
                 $response = $this->insertData($this->data);
                 if($response) {
-                    echo "\n" . $oneRow['stock_code'] . "was entered to database successfully\n";
+                    echo "\n" . $oneRow['stock_code'] . " was entered to database successfully\n";
                 }
             }
+
+            echo "\n moving " . $csvFile;
             $this->moveFile($csvFile);
         }
     }
@@ -76,7 +79,6 @@ class Backorder extends Mage_Shell_Abstract
                     . "," . "'" . $data['user_name'] . "'" . "," . "'" . $data['add_time'] . "'"
                     . "," . "null" . ","  . $data['status'] . "," . "null" .")");
 
-                echo "New record created successfully";
                 return true;
             } catch (PDOException $e) {
                 echo $e->getMessage();
@@ -140,6 +142,7 @@ class Backorder extends Mage_Shell_Abstract
 
     private function validateEmail($email, $fileData)
     {
+
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $email;
         } else {
@@ -152,10 +155,11 @@ class Backorder extends Mage_Shell_Abstract
                 "customer" => $fileData['customer'],
                 "order_id" => $fileData["order_id"]
             );
+
             $this->sendEmail($templateId, $recipientEmail, $recipientName, $vars);
         }
 
-        return 'invalid email';
+        return false;
     }
 
     protected function getFileData($csvFile)
